@@ -1,2 +1,0 @@
-# AlintaCustomerSearch
-Created with CodeSandbox

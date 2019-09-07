@@ -51,7 +51,7 @@ const EditableCell = ({ id, field, initialValue }) => {
 
 EditableCell.propTypes = {
   id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  field: PropTypes.string.isRequired,
   initialValue: PropTypes.string.isRequired
 };
 

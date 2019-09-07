@@ -1,73 +1,42 @@
 import * as React from 'react';
-import { Layout, HeaderCell, EditCell } from './CustomerList.styles';
+import PropTypes from 'prop-types';
+import { Layout } from './CustomerList.styles';
+import EditableCell from './EditableCell';
+import DeleteButton from './DeleteButton';
+import { actions } from '../../store';
 
-const EditableCell = ({ id, label, initialValue }) => {
-  const [mode, setMode] = React.useState('view');
-  const [value, setValue] = React.useState(initialValue);
-
-  React.useEffect(() => {
-    if (mode === 'edit') {
-      input.current.focus();
-    }
-  }, [mode]);
-  const input = React.useRef(null);
-
-  const toggleMode = () => {
-    const newMode = mode === 'view' ? 'edit' : 'view';
-    setMode(newMode);
-  };
-
-  const onChange = (evt) => {
-    setValue(evt.target.value);
-  };
-
-  const onKeyPress = ({ charCode }) => {
-    if (charCode === 13) {
-      toggleMode();
-    }
-  };
-
-  if (mode === 'view') {
-    return <div onClick={toggleMode}>{value}</div>;
-  }
-
-  return (
-    <EditCell
-      ref={input}
-      type="text"
-      onChange={onChange}
-      onKeyPress={onKeyPress}
-      onBlur={toggleMode}
-      value={value}
-    />
-  );
-};
-
-const renderCustomer = ({ firstName, lastName, dob }, idx) => [
+const renderCustomer = ({ id, firstName, lastName, dob }) => [
+  <DeleteButton
+    onClick={actions.removeCustomer.bind(null, id)}
+    key={`${id}.delete`}
+    id={id}
+  />,
   <EditableCell
-    key={`${idx}.1`}
-    id={idx}
-    label="firstName"
+    key={`${id}.${firstName}`}
+    id={id}
+    field="firstName"
     initialValue={firstName}
   />,
   <EditableCell
-    key={`${idx}.2`}
-    id={idx}
-    label="lastName"
+    key={`${id}.${lastName}`}
+    id={id}
+    field="lastName"
     initialValue={lastName}
   />,
-  <EditableCell key={`${idx}.3`} id={idx} label="dob" initialValue={dob} />
+  <EditableCell key={`${id}.${dob}`} id={id} field="dob" initialValue={dob} />
 ];
 
+const EmptyMessage = () => <p>No results</p>;
+
 const CustomerList = ({ customers }) => {
-  return (
-    <Layout>
-      <HeaderCell>First Name</HeaderCell>
-      <HeaderCell>Last Name</HeaderCell>
-      <HeaderCell>Date of Birth</HeaderCell>
-      {customers.map(renderCustomer)}
-    </Layout>
-  );
+  if (!customers.length) {
+    return <EmptyMessage />;
+  }
+  return <Layout>{customers.map(renderCustomer)}</Layout>;
+};
+
+CustomerList.propTypes = {
+  customers: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default CustomerList;

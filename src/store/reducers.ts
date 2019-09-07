@@ -1,14 +1,57 @@
-const intitialState = {
-  customers: [
-    { firstName: 'Kim', lastName: 'Bob', dob: '12/12/2001' },
-    { firstName: 'Barry', lastName: 'White', dob: '01/04/1967' },
-    { firstName: 'Augustus', lastName: 'Gloop', dob: '14/09/1974' }
-  ],
+import { generateFakeCustomers } from '../shared/utils';
+import uuid from 'uuid/v1';
+import { Customer } from '../shared/types';
+import { Actions } from './actions';
+
+interface AppState {
+  customers: Customer[];
+  filter: string;
+}
+
+const intitialState: AppState = {
+  customers: generateFakeCustomers(10),
   filter: ''
 };
 
-const reducer = (state = intitialState, { type, payload }) => {
-  return intitialState;
+const reducer = (state = intitialState, { type, payload }): AppState => {
+  switch (type) {
+    case Actions.UPDATE_FILTER:
+      return {
+        ...state,
+        filter: payload
+      };
+
+    case Actions.ADD_CUSTOMER:
+      return {
+        ...state,
+        customers: [
+          ...state.customers,
+          {
+            id: uuid(),
+            ...payload
+          }
+        ]
+      };
+
+    case Actions.UPDATE_CUSTOMER:
+      const { id, field, value } = payload;
+      const customers = state.customers.slice();
+      customers.find((customer) => customer.id === id)[field] = value;
+
+      return {
+        ...state,
+        customers
+      };
+
+    case Actions.REMOVE_CUSTOMER:
+      return {
+        ...state,
+        customers: state.customers.filter((customer) => customer.id !== payload)
+      };
+
+    default:
+      return intitialState;
+  }
 };
 
 export default reducer;

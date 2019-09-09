@@ -24,11 +24,14 @@ const reducer = (state = intitialState, { type, payload }): AppState => {
     case Actions.ADD_CUSTOMER:
       return {
         ...state,
+        filter: '',
         customers: [
           ...state.customers,
           {
             id: uuid(),
-            ...payload
+            firstName: '',
+            lastName: '',
+            dob: ''
           }
         ]
       };

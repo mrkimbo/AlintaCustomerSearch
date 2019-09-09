@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { searchFilter } from '../shared/utils';
 import CustomerSearch from './CustomerSearch';
 import CustomerList from './CustomerList';
+import NewCustomerButton from './NewCustomerButton';
+import { actions } from '../store';
 
 const Title = styled.h1`
   color: #333;
@@ -15,6 +17,9 @@ const CustomerView = ({ customers }) => (
     <Title>Customers</Title>
     <CustomerSearch />
     <CustomerList customers={customers} />
+    <NewCustomerButton onClick={actions.addCustomer}>
+      Add New Customer
+    </NewCustomerButton>
   </>
 );
 

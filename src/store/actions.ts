@@ -10,9 +10,8 @@ export const updateFilter = (filter) => ({
   payload: filter
 });
 
-export const addCustomer = (firstName, lastName, dob) => ({
-  type: Actions.ADD_CUSTOMER,
-  payload: { firstName, lastName, dob }
+export const addCustomer = () => ({
+  type: Actions.ADD_CUSTOMER
 });
 
 export const updateCustomer = (id, field, value) => ({

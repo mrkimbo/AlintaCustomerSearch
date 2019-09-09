@@ -16,13 +16,10 @@ export const generateFakeCustomers = (n): Customer[] =>
   }));
 
 export const searchFilter = (filter) => ({ firstName, lastName }) => {
-  // console.log('searchFilter', filter);
   if (!filter) return true;
 
-  const isMatch =
+  return (
     firstName.toLowerCase().startsWith(filter.toLowerCase()) ||
-    lastName.toLowerCase().startsWith(filter.toLowerCase());
-  // console.log(filter, firstName, lastName, isMatch);
-
-  return isMatch;
+    lastName.toLowerCase().startsWith(filter.toLowerCase())
+  );
 };

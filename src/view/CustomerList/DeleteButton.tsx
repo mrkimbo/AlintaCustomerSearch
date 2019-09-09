@@ -1,4 +1,6 @@
+import * as React from 'react';
 import styled from 'styled-components';
+import { TableCell } from '../CustomerList/CustomerList.styles';
 
 const DeleteButton = styled.button`
   cursor: pointer;
@@ -14,3 +16,9 @@ const DeleteButton = styled.button`
 `;
 
 export default DeleteButton;
+
+// export default ({ onClick }) => (
+//   <TableCell>
+//     <DeleteButton onClick={onClick} />
+//   </TableCell>
+// );

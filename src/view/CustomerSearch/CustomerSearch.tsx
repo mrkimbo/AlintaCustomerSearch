@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import * as styles from '../../shared/styles';
 import { actions } from '../../store';
 
+const Container = styled.div`
+  grid-column: 1/5;
+`;
+
 const SearchInput = styled.input`
   padding: 4px 2px;
   margin-bottom: ${styles.spacing};
@@ -31,10 +35,10 @@ const CustomerSearch = () => {
   }, [filter]);
 
   return (
-    <div>
+    <Container>
       <SearchLabel htmlFor="search">Find Customers:</SearchLabel>
       <SearchInput id="search" type="text" onChange={onChange} value={filter} />
-    </div>
+    </Container>
   );
 };
 

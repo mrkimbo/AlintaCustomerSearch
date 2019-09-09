@@ -7,8 +7,15 @@ const EditableCell = ({ id, field, initialValue }) => {
   const [mode, setMode] = React.useState('view');
   const [value, setValue] = React.useState(initialValue);
   const input = React.useRef(null);
+  const isNewCustomer = !value && field === 'firstName';
+
+  // Autofocus new customer input fields
+  if (isNewCustomer && mode === 'view') {
+    setMode('edit');
+  }
 
   React.useEffect(() => {
+    console.log(isNewCustomer);
     if (mode === 'edit') {
       input.current.focus();
       return;
@@ -50,9 +57,13 @@ const EditableCell = ({ id, field, initialValue }) => {
 };
 
 EditableCell.propTypes = {
-  id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  field: PropTypes.string.isRequired,
   initialValue: PropTypes.string.isRequired
+};
+
+EditableCell.defaultProps = {
+  id: ''
 };
 
 export default EditableCell;

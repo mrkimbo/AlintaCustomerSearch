@@ -21,7 +21,9 @@ npm install
 
 ## Running the App
 
-From the project folder, run the following command:
+Demo running at [https://jy0x3.csb.app/](https://jy0x3.csb.app/)
+
+Alternatively, to run locally, use the following command from the project folder:
 
 ```bash
 npm start

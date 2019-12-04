@@ -1,5 +1,5 @@
 # Alinta Customer Search
-Coding Test / Excuse to try new stuff...
+Coding Test / Excuse to try new stuff... (functional but not polished!)
 
 ## Installation / Setup
 
